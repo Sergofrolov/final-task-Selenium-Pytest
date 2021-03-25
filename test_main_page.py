@@ -8,8 +8,6 @@ def test_guest_can_go_to_login_page(browser):
     # открываем страницу
     page.open()
     # выполняем метод страницы — переходим на страницу логина
-    page.go_to_login_page()
-    # выполняется проверка наличия кнопки авторизации
-    page.should_be_login_link()
+    login_page = page.go_to_login_page()
     # выполняются проверки страницы авторизации
     login_page.should_be_login_page()
