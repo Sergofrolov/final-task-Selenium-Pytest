@@ -1,4 +1,5 @@
 from pages.product_page import ProductPage
+from pages.basket_page import BasketPage
 import pytest
 
 @pytest.mark.skip
@@ -31,6 +32,20 @@ def test_guest_can_add_product_to_basket(browser, promolink):
     page.should_be_cart_price()
     # cтоимость корзины совпадает с ценой товара
     page.check_cart_price_is_good_price()
+
+def test_guest_cant_see_product_in_basket_opened_from_product_page(browser):
+    link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
+    page = ProductPage(browser, link)
+    #Гость открывает страницу продукта
+    page.open()
+    #Переходит в корзину по кнопке в шапке сайта
+    page.go_to_basket_page()
+    # переменной basket_page присваивается url текущей страницы
+    basket_page = BasketPage(browser, browser.current_url)
+    #Ожидаем, что в корзине нет товаров
+    basket_page.should_not_be_goods_in_basket()
+    #Ожидаем, что есть текст о том что корзина пуста
+    basket_page.should_be_basket_empty_text()
 
 def test_guest_should_see_login_link_on_product_page(browser):
     link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
