@@ -13,14 +13,16 @@ class ProductPage(BasePage):
         "Success message is presented, but should not be"
 
     def should_be_message_good_added_to_cart(self):
-        assert self.is_element_present(*ProductPageLocators.ADD_TO_CART_SUCCESS_MESSAGE_GOOD), "Add to cart message is not presented"
+        assert self.is_element_present(*ProductPageLocators.ADD_TO_CART_SUCCESS_MESSAGE_GOOD), \
+               "Add to cart message is not presented"
 
     def check_message_good_added_to_cart(self):
         good_message = self.browser.find_element(*ProductPageLocators.ADD_TO_CART_SUCCESS_MESSAGE_GOOD)
         good_message_text = good_message.text
         good_name = self.browser.find_element(*ProductPageLocators.GOOD_NAME)
         good_name_text = good_name.text
-        assert good_name_text == good_message_text, "Good name in add to cart message does not match with name of added good"
+        assert good_name_text == good_message_text, \
+               "Good name in add to cart message does not match with name of added good"
 
     def should_be_cart_price(self):
         assert self.is_element_present(*ProductPageLocators.CART_PRICE_NOW), "Cart price is not presented"
